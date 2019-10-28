@@ -16,5 +16,15 @@ La programación orientada a Objetos básicamente define una serie de conceptos 
 
 Los objetos representan una entidad concreta o abstracta del mundo real, en programación, básicamente se le conoce como la instancia de una clase en sí es lo que da el sentido a estas. Es decir que con una clase , instanciamos objetos a la memoria del computador.  
 
+En este ambito, un objeto tiene atributos y propiedades que lo definen, realiza diferentes acciones e interactua con otros objetos, es decir tiene un comportamiento. 
+
 Al igual que las clases se componen de tres partes fundamentales:
+
+**Estado**: Representa los atributos o características con valores concretos del objeto. 
+
+**Comportamiento** : Se define por los métodos u operaciones que se pueden realizar con él. 
+
+**Identidad** : Es la propiedad única que representa al objeto y lo diferencia del resto.
+
+
 
