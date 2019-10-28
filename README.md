@@ -58,9 +58,7 @@ Atributos, identidad, relaciones y métodos.
 
 Un objeto se representa por medio de una tabla o entidad que esté compuesta por sus atributos y funciones correspondientes.
 
-**Private**: solo visible para la clase que lo contiene. 
-
-![Representaci&#xF3;n de una clase](.gitbook/assets/image.png)
+![Representaci&#xF3;n de una clase, con sus propiedades y m&#xE9;todos](.gitbook/assets/image%20%281%29.png)
 
 ## Pilares de la POO
 
@@ -77,6 +75,8 @@ Un ejemplo de clases, objetos y métodos se puede observar que todos los vehícu
 La encapsulación es una forma de darle uso exclusivo a los comportamientos o atributos que posee una clase, es decir, protege esos atributos y comportamientos para que no sean usados de manera externa.
 
 La encapsulación es el proceso de ocultar el funcionamiento interno de nuestras clases. Eso significa que especificamos una especificación pública, utilizada por los consumidores de nuestra clase, mientras que el trabajo real está oculto. La ventaja es que una clase puede cambiar su funcionamiento sin necesidad de cambiar a sus consumidores. En C \# tenemos cuatro palabras clave de modificadores de acceso que permiten cinco formas de controlar la visibilidad del código:
+
+**Private**: solo visible para la clase que lo contiene. 
 
 **Protected**: solo visible para la clase que lo contiene y los herederos. 
 
