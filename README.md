@@ -58,5 +58,35 @@ Atributos, identidad, relaciones y métodos.
 
 Un objeto se representa por medio de una tabla o entidad que esté compuesta por sus atributos y funciones correspondientes.
 
+**Private**: solo visible para la clase que lo contiene. 
+
 ![Representaci&#xF3;n de una clase](.gitbook/assets/image.png)
+
+## Pilares de la POO
+
+La **POO** tiene tres tipos de propiedades que permiten facilitar esta forma de programar y en esta materia  explicaremos cada una ellas que son: la encapsulación, herencia y polimorfismo, veremos a lo largo de la misma, ejemplos prácticos 
+
+### **Polimorfismo**
+
+La palabra polimorfismo viene del griego pilo que significa muchas y morfismo que significa formas, es decir, muchas formas. El polimorfismo en es la capacidad que tienen los objetos de diferentes clases para usar un comportamiento o atributo del mismo nombre pero con diferente valor \(es decir métodos con mismo nombre pero diferente comportamiento\).
+
+Un ejemplo de clases, objetos y métodos se puede observar que todos los vehículos tienen la capacidad de desplazarse pero no se desplazan de la misma manera, dado que una moto se desplaza sobre dos ruedas y un coche se desplaza sobre cuatro, eso es el polimorfismo, otro caso mas concreto, es la sobrecarga del método ToString\(\)**.**
+
+### **Encapsulación**
+
+La encapsulación es una forma de darle uso exclusivo a los comportamientos o atributos que posee una clase, es decir, protege esos atributos y comportamientos para que no sean usados de manera externa.
+
+La encapsulación es el proceso de ocultar el funcionamiento interno de nuestras clases. Eso significa que especificamos una especificación pública, utilizada por los consumidores de nuestra clase, mientras que el trabajo real está oculto. La ventaja es que una clase puede cambiar su funcionamiento sin necesidad de cambiar a sus consumidores. En C \# tenemos cuatro palabras clave de modificadores de acceso que permiten cinco formas de controlar la visibilidad del código:
+
+**Protected**: solo visible para la clase que lo contiene y los herederos. 
+
+**Intern**: solo visible para las clases en el mismo ensamblado. 
+
+**Public**: visible para todos.
+
+### Herencia
+
+La Herencia explica que puede crearse un objeto a partir de otro objeto ya existente. El nuevo objeto hereda todas las cualidades del objeto del que deriva y además puede añadir nuevas funcionalidades o modificar las ya existentes.
+
+La herencia es una parte importante de cualquier lenguaje orientado a objetos. Las clases pueden heredarse entre sí, lo que significa que la clase heredada obtiene todo el comportamiento de la clase heredada, también conocida como la clase base.
 
