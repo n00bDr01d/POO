@@ -234,15 +234,13 @@ static void Main()
 
 Existen 17 versiones sobrecargadas del método Sort en la Array. Una forma básica de uso sobre un único arreglo podría ser:
 
-{% code-tabs %}
-{% code-tabs-item title="csharp" %}
+
 ```csharp
 int[] numeros = {5, 2, 3, 7};
 Array.Sort(numeros);    // {2, 3, 6, 7}
 
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+
 
 O usar la versión que acepta dos arreglos:
 
@@ -254,7 +252,7 @@ Array.Sort(numeros, tresMaestros);    // {2, 3, 6, 7}, { "Balzac", "Dickens", "D
 
 Vale agregar que existen otras versiones sobrecargadas que facilitan especificar un delegado de comparación para la personlización la forma en que se debe llegar la comparación:
 
-public delegate int Comparison\(T x, T y\)
+public delegate int Comparison(T x, T y)
 
 ### Conclusiones
 
