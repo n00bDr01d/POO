@@ -12,7 +12,7 @@ Una colección es una clase, por lo que debe declarar una instancia de la clase 
 
 Si la colección contiene elementos de un solo tipo de datos, puede usar una de las clases del espacio de nombres [System.Collections.Generic](https://docs.microsoft.com/es-es/dotnet/api/system.collections.generic). Una colección genérica cumple la seguridad de tipos para que ningún otro tipo de datos se pueda agregar a ella. Cuando recupera un elemento de una colección genérica, no tiene que determinar su tipo de datos ni convertirlo.
 
-## La Clase Array en C\
+## La Clase Array en C\#
 
 El estudio de la clase Array en el lenguaje de programación C\#. Esta clase, como ya veremos, es una implementación particular de IList; tanto su versión no-genéria como genérica, dado que el acceso a los elementos se realiza a través de un índice. Aún sí, sabremos que no todos los métodos de estas clases tendrán un codificación específica, sino que se lanzará la excepción NotSupportedException.
 
@@ -20,7 +20,7 @@ La primera parte es una introducción acerca de los fundamentales. La segunda se
 
 ### Generalidades
 
-#### Jerarquía de herencia e implementación
+### Jerarquía de herencia e implementación
 
 La clase Array es una de las clases base que implementa las interfaces estándar de colección; i.e., IList, ICollection y IEnumerable . Se trata de un tipo abstracto que provee métodos estáticos y de instancia para realizar operaciones sobre arreglos: creación, manipulación, búsqueda y ordenamiento.
 
@@ -28,13 +28,13 @@ Se sabe que uno de los principios de .NET Framework es la unificación de tipos 
 
 Con relación a lo anterior, los arreglos son considerados una estructura de datos o colección esencial en el lenguaje de programación C\# y todos los demás lenguajes de programación compatibles con la CLR. En el artículo [Arreglos en C\#](https://ortizol.blogspot.com/2013/09/arreglos-en-c.html) se expone la sintaxis declarativa y de manipulación de arreglos sobre C\#.
 
-#### Sintetización de pseudo-subtipos
+### Sintetización de pseudo-subtipos
 
 Otra característica interna y esencial es la sintetización de pseudo-subtipos de arreglos tanto para el tamaño o dimensión como para el tipo de dato subyacente. Por ejemplo, si se crea un arreglo con el tipo de dato string, las interfaces génericas que implementa Array cambiarán su tipo paramétrico a este mismo: IList&lt;string&gt;.
 
 Adicionalmente la máquina virtual CLR asignará al arreglo recién creado un espacio contiguo en la memoria de trabajo. Aunque esto resulte eficiente en el acceso basado en índices, no se permite el redimensionamiento en el ciclo de ejecución del programa. El método Resize&lt;T&gt; \("Array.Resize\(T\)"\) permite cambiar el tamaño de un arreglo especificado por uno nuevo; sin embargo, cualquier otra referencia al arreglo anterior continuará sin ser modificada. Para solucionar esta carencia, se opta por el uso de colecciones dinámicas como List&lt;T&gt;.
 
-#### Tipos por referencia y por valor
+### Tipos por referencia y por valor
 
 El almacenamiento de los tipos por valor se computa a partir del tamaño del tipo dato; es decir, que si un arreglo de 5 elementos de tipo de dato int -4 bytes-, ocupará 20 bytes. Este no es el caso para los arreglos que localizan tipos por referencia: cada elemento del arreglo sólo ocupará el espacio dependiendo de la arquitectura del sistema: 4 bytes en un ambiente de 32 bits u 8 bytes en un ambiente de 64 bits.
 
@@ -55,7 +55,7 @@ numbers[0] = 12345;
 numbers[1] = 54321;
 ```
 
-#### Comparación y copiado
+### Comparación y copiado
 
 Todos los arreglos en su defecto son tipos por referencia a razón que Array es una clase. Si se tienen dos variables, digamos arreglo1 y arreglo2, entonces al realizar la siguiente asignación arreglo1 = arreglo2, ambas apuntarán al mismo arreglo en memoria.
 
@@ -95,7 +95,7 @@ StringBuilder[] shalowClone = (StringBuilder[]) builders.Clone();
 
 Para crear una copia del contenido y las referencias de un arreglo, se debe efectuar una copia de tipo deep. Para lograrlo es necesario iterar el arreglo y realizar una clonación por cada elemento. Esto también aplica para los demás tipos de colecciones de .NET Framework.
 
-#### Creación e Indexación
+### Creación e Indexación
 
 C\# provee diferentes alternativas para la creación y acceso por medio de índices. Una formá básica comprende el uso de esta sintaxis:
 
@@ -124,7 +124,7 @@ Nótese que el tipo de dato asociado al arreglo se define a través del operador
 
 Independiente del mecanismo de inicialización de un arreglo que se use, cada uno de sus elementos se inicializan de manera automática.
 
-#### Enumeración
+### Enumeración
 
 Para recorrer un arreglo es posible utilizar diferentes mecanismos. Partimos de esta definición:
 
@@ -132,7 +132,7 @@ Para recorrer un arreglo es posible utilizar diferentes mecanismos. Partimos de 
 int[] arregloEnteros = {2, 3, 5};
 ```
 
-#### Ciclo for
+### Ciclo for
 
 ```csharp
 for(int i = 0; i &lt; arregloEnteros.Length; ++i){    Console.WriteLine(arregloEnteros[i]);}
@@ -140,7 +140,7 @@ for(int i = 0; i &lt; arregloEnteros.Length; ++i){    Console.WriteLine(arregloE
 
 Aquí el recorrido se realiza a partir de un índice: la variable entera i. El arreglo itera desde el primer elemento -0- hasta que la condición de continuación de ciclo no se cumpla -i == arregloEnteros.Length-
 
-#### El ciclo mejorado foreach
+### El ciclo mejorado foreach
 
 ```csharp
 foreach(int valor in arregloEnteros){    Console.WriteLine(valor)}
@@ -148,7 +148,7 @@ foreach(int valor in arregloEnteros){    Console.WriteLine(valor)}
 
 Este mecanismo es más simple que el anterior, pero no permite la modificación de los datos adyacentes al arreglo.
 
-#### El método de extensión ForEach
+### El método de extensión ForEach
 
 Con el método de extensión ForEach, se especifica el arreglo a ser recorrido y la acción a aplicar en cada elemento:
 
@@ -156,9 +156,9 @@ Con el método de extensión ForEach, se especifica el arreglo a ser recorrido y
 Array.ForEach(arregloEnteros, Console.WriteLine);
 ```
 
-#### Longitud y Rango
+### Longitud y Rango
 
-#### Longitud
+### Longitud
 
 Para obtener la longitud o tamaño de una dimensión de un arreglo se usan los métodos de instancia Array.GetLength y Array.GetLongLength.  
 En lo que se refiere a las propiedades Length y LongLength, éstas obtienen la cantidad total de elementos en todas las dimensiones del arreglo.  
@@ -167,7 +167,7 @@ Otros métodos interesantes son:
 * GetLowerBound: Obtiene el índice del primer elemento de la una dimensión especificada.
 * GetUpperBound: Obtiene el índice del último elemento de la una dimensión especificada.
 
-#### Rango
+### Rango
 
 El rango de un arreglo se obtiene a través de la propiedad Rank.
 
@@ -175,9 +175,7 @@ El rango de un arreglo se obtiene a través de la propiedad Rank.
 
 En esta primera parte comprendimos los principios de la clase Array: una clase unificadora para definir arreglos básicos, ya sea de tipos por valor o tipos por referencia. Estudiamos las formas de declarar y acceder los elementos: básada en índices y métodos static y de instancia. Más adelante nos concentramos entender cómo se recorre o enumera los elementos: for, foreach y ForEach. Al final, se reconocieron los métodos para obtener el tamaño y el número de dimensiones de un arreglo.
 
-
-
-#### Búsqueda
+### Búsqueda
 
 La clase Array ofrece tres clases de métodos de búsqueda para arreglos unidimensionales Método static sobrecargado **BinarySearch** : busca sobre un arreglo ordenado usando el algoritmo de búsqueda binaria. **Búsqueda locativa**: los métodos **IndexOf** y **LastIndex** recuperan el primer y último elemento de un arreglo. **Búsqueda por predicados**: los métodos **Find**, **FindLast**, **FindIndex**, **FindLastIndex**, **FindAll**, **Exists** y **TrueForAll** realizan una búsqueda partiendo de un predicado lógico de tipo Predicate. Cuando no se encuentra un elemento en un arreglo usando cualquiera de los métodos de búsqueda, éstos retornan -1 o el valor por defecto del tipo paramétrico -0 para valores numéricos o null para string, por ejemplo-.
 
@@ -232,7 +230,7 @@ static void Main()
 
 \[Nota: se recomienda leer la documentación para comprender los demás métodos que aceptan un predicado para efecutar una búsqueda.\]
 
-#### Ordenamiento
+### Ordenamiento
 
 Existen 17 versiones sobrecargadas del método Sort en la Array. Una forma básica de uso sobre un único arreglo podría ser:
 
@@ -258,7 +256,7 @@ Vale agregar que existen otras versiones sobrecargadas que facilitan especificar
 
 public delegate int Comparison\(T x, T y\)
 
-#### Conclusiones
+### Conclusiones
 
 Hemos explorado las formas esenciales para buscar y ordernar los elementos en una colección de tipo Array. Estos métodos comprenden operaciones fundamentales para manipular elementos de datos para solución de problemas.
 
