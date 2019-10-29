@@ -1,4 +1,4 @@
-# Arreglos, colecciones y colecciones genéricas
+## Arreglos, colecciones y colecciones genéricas
 
 ## Introducción
 
@@ -32,7 +32,7 @@ Con relación a lo anterior, los arreglos son considerados una estructura de dat
 Otra característica interna y esencial es la sintetización de pseudo-subtipos de arreglos tanto para el tamaño o dimensión como para el tipo de dato subyacente. Por ejemplo, si se crea un arreglo con el tipo de dato string, las interfaces génericas que implementa Array cambiarán su tipo paramétrico a este mismo: IList&lt;string&gt;.  
   
   
-Adicionalmente la máquina virtual CLR asignará al arreglo recién creado un espacio contiguo en la memoria de trabajo. Aunque esto resulte eficiente en el acceso basado en índices, no se permite el redimensionamiento en el ciclo de ejecución del programa. El método Resize&lt;T&gt; \("Array.Resize\(T\)", 2017\) permite cambiar el tamaño de un arreglo especificado por uno nuevo; sin embargo, cualquier otra referencia al arreglo anterior continuará sin ser modificada. Para solucionar esta carencia, se opta por el uso de colecciones dinámicas como List&lt;T&gt;.
+Adicionalmente la máquina virtual CLR asignará al arreglo recién creado un espacio contiguo en la memoria de trabajo. Aunque esto resulte eficiente en el acceso basado en índices, no se permite el redimensionamiento en el ciclo de ejecución del programa. El método Resize&lt;T&gt; \("Array.Resize\(T\)") permite cambiar el tamaño de un arreglo especificado por uno nuevo; sin embargo, cualquier otra referencia al arreglo anterior continuará sin ser modificada. Para solucionar esta carencia, se opta por el uso de colecciones dinámicas como List&lt;T&gt;.
 
 #### Tipos por referencia y por valor
 
@@ -46,14 +46,17 @@ para la ilustración gráfica de este modelo de almacenamiento:
 Esta ilustración puede traducirse al siguiente código fuente:
 
   
-StringBuilder\[\] builders = new StringBuilder\[5\];  
-builders\[0\] = new StringBuilder\("builder1"\);  
-builders\[1\] = new StringBuilder\("builder2"\);  
-builders\[2\] = new StringBuilder\("builder3"\);  
+
+```csharp 
+StringBuilder[] builders = new StringBuilder[5];  
+builders[0] = new StringBuilder("builder1");  
+builders[1] = new StringBuilder("builder2");  
+builders[2] = new StringBuilder("builder3");  
   
-long\[\] numbers = new long\[3\];  
-numbers\[0\] = 12345;  
-numbers\[1\] = 54321;  
+long[] numbers = new long[3];  
+numbers[0] = 12345;  
+numbers[1] = 54321;  
+```
 
 
 #### Comparación y copiado
@@ -62,45 +65,56 @@ Todos los arreglos en su defecto son tipos por referencia a razón que Array es 
   
 En cuanto a la comparación del contenido de los arreglos -i.e., comparación estructural- el operador == y el método Equals producen false como resultado:   
   
-object\[\] a1 = {"Balzac", 1799, true};  
-object\[\] a2 = {"Balzac", 1799, true};  
+
+```csharp
+object[] a1 = {"Balzac", 1799, true};  
+object[] a2 = {"Balzac", 1799, true};  
   
-Console.WriteLine\(a1 == a2\);  
-Console.WriteLine\(a1.Equals\(a2\)\);  
+Console.WriteLine(a1 == a2);  
+Console.WriteLine(a1.Equals(a2));  
+```
   
   
 Para realizar comparación estructural podemos usar un comparador de igualdad personalizado o por medio de la clase static StructuralComparisons \(disponible a partir de la versión 4.0 de .NET Framework\):   
   
+
+```csharp
 IStructuralEquatable se1 = a1;  
-Console.WriteLine\(se1.Equals\(a2, StructuralComparisons.StructuralEqualityComparer\);  
+Console.WriteLine(se1.Equals(a2, StructuralComparisons.StructuralEqualityComparer);  
+```
   
 Esta sentencia da como resultado true, a razón de que el contenido de ambos arreglos es igual.  
   
   
 Por su parte, la operación de clonación, la cual se lleva a cabo con el método Clone, como en   
   
-arregloB = arregloA.Clone\(\)  
-  
+
+```chsarp
+arregloB = arregloA.Clone()  
+```  
   
 genera una copia shallow: lo que quiere decir que sólo se copia la memoria que representa al arreglo y no los valores de los elementos y sus datos localizados en la memoria. La Figura 2 ilustra mejor este concepto a partir del siguiente código fuente:  
   
-StringBuilder\[\] builders2 = builders;  
-StringBuilder\[\] shalowClone = \(StringBuilder\[\]\) builders.Clone\(\);  
 
+```csharp
+StringBuilder[] builders2 = builders;  
+StringBuilder[] shalowClone = (StringBuilder[]) builders.Clone();  
+```
 
 ![](.gitbook/assets/image%20%282%29.png)
 
 
-
-  
 Para crear una copia del contenido y las referencias de un arreglo, se debe efectuar una copia de tipo deep. Para lograrlo es necesario iterar el arreglo y realizar una clonación por cada elemento. Esto también aplica para los demás tipos de colecciones de .NET Framework.
 
 #### Creación e Indexación
 
-C\# provee diferentes alternativas para la creación y acceso por medio de índices. Una formá básica comprende el uso de esta sintaxis:  
-int\[\] arregloEnteros = {2, 3, 5};  
-Console.WriteLine\(arregloEnteros\[0\]\); // Primer elemento  
-Console.WriteLine\(arregloEnteros\[arregloEnteros.Length - 1\]\); // Último elemento  
+C# provee diferentes alternativas para la creación y acceso por medio de índices. Una formá básica comprende el uso de esta sintaxis:  
+
+```csharp
+int[] arregloEnteros = {2, 3, 5};  
+Console.WriteLine(arregloEnteros[0]); // Primer elemento  
+Console.WriteLine(arregloEnteros[arregloEnteros.Length - 1]); // Último elemento  
+```
   
   
 Otra de las formas disponibles consiste en usar el método static CreateInstance:
@@ -109,15 +123,18 @@ Otra de las formas disponibles consiste en usar el método static CreateInstance
 
   
 Entonces el arreglo definido anteriormente también se puede escribir así:  
-Array arregloEnteros = Array.CreateInstance\(typeof\(int\), 3\);  
-arregloEnteros.SetValue\(2, 0\);  
-arregloEnteros.SetValue\(3, 1\);  
-arregloEnteros.SetValue\(5, 2\);  
-Console.WriteLine\(arregloEnteros.GetValue\(0\)\); // Primer elemento  
-Console.WriteLine\(arregloEnteros.GetValue\(arregloEnteros.Length - 1\)\); // Último elemento  
+
+```csharp
+Array arregloEnteros = Array.CreateInstance(typeof(int), 3);  
+arregloEnteros.SetValue(2, 0\);  
+arregloEnteros.SetValue(3, 1\);  
+arregloEnteros.SetValue(5, 2\);  
+Console.WriteLine(arregloEnteros.GetValue(0)); // Primer elemento  
+Console.WriteLine(arregloEnteros.GetValue(arregloEnteros.Length - 1)); // Último elemento  
+```
   
   
-Nótese que el tipo de dato asociado al arreglo se define a través del operador typeof \([El Método GetType y el Operador typeof en C\#](https://ortizol.blogspot.com.co/2014/04/el-metodo-gettype-y-el-operador-typeof.html)\).  
+Nótese que el tipo de dato asociado al arreglo se define a través del operador typeof ([El Método GetType y el Operador typeof en C\#](https://ortizol.blogspot.com.co/2014/04/el-metodo-gettype-y-el-operador-typeof.html)).  
   
   
 Independiente del mecanismo de inicialización de un arreglo que se use, cada uno de sus elementos se inicializan de manera automática.
@@ -125,24 +142,35 @@ Independiente del mecanismo de inicialización de un arreglo que se use, cada un
 #### Enumeración
 
 Para recorrer un arreglo es posible utilizar diferentes mecanismos. Partimos de esta definición:  
-int\[\] arregloEnteros = {2, 3, 5};
+
+```csharp
+int[] arregloEnteros = {2, 3, 5};
+```
 
 #### Ciclo for
 
-for\(int i = 0; i &lt; arregloEnteros.Length; ++i\){    Console.WriteLine\(arregloEnteros\[i\]\);}  
+
+```chsarp
+for(int i = 0; i &lt; arregloEnteros.Length; ++i){    Console.WriteLine(arregloEnteros[i]);}  
+```
 Aquí el recorrido se realiza a partir de un índice: la variable entera i. El arreglo itera desde el primer elemento -0- hasta que la condición de continuación de ciclo no se cumpla -i == arregloEnteros.Length-
 
 #### El ciclo mejorado foreach
 
-foreach\(int valor in arregloEnteros\){    Console.WriteLine\(valor\)}  
 
+```csharp
+foreach(int valor in arregloEnteros){    Console.WriteLine(valor)}  
+```
 
 Este mecanismo es más simple que el anterior, pero no permite la modificación de los datos adyacentes al arreglo.
 
 #### El método de extensión ForEach
 
 Con el método de extensión ForEach, se especifica el arreglo a ser recorrido y la acción a aplicar en cada elemento:  
-Array.ForEach\(arregloEnteros, Console.WriteLine\);
+
+```csharp
+Array.ForEach(arregloEnteros, Console.WriteLine);
+```
 
 #### Longitud y Rango
 
@@ -162,4 +190,3 @@ El rango de un arreglo se obtiene a través de la propiedad Rank.
 ### **Conclusiones**
 
 En esta primera parte comprendimos los principios de la clase Array: una clase unificadora para definir arreglos básicos, ya sea de tipos por valor o tipos por referencia. Estudiamos las formas de declarar y acceder los elementos: básada en índices y métodos static y de instancia. Más adelante nos concentramos entender cómo se recorre o enumera los elementos: for, foreach y ForEach. Al final, se reconocieron los métodos para obtener el tamaño y el número de dimensiones de un arreglo.
-
